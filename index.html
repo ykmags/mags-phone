@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mags's Phone Status</title>
+
+<style>
+body {
+  margin: 0;
+  background: #061425;
+  font-family: system-ui, sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* CARD */
+.card {
+  width: 520px;
+  background: linear-gradient(180deg,#0b1f3a,#08162b);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+}
+
+h2 {
+  margin: 0;
+  color: #53f3b3;
+}
+
+.subtitle {
+  color: #9fb3c8;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* LAYOUT */
+.device {
+  display: flex;
+  gap: 20px;
+}
+
+.phone {
+  width: 120px;
+  height: 200px;
+  border-radius: 14px;
+  background: #0e2a45;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.battery-big {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.info {
+  flex: 1;
+}
+
+/* HEADER ROW */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.badge {
+  background: #0f3d36;
+  color: #53f3b3;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+/* PROGRESS */
+.progress-block {
+  margin-bottom: 18px;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.progress {
+  height: 10px;
+  background: #1a2d46;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  background: #34f5a3;
+  width: 0%;
+  transition: width 0.6s ease;
+}
+
+/* FOOTER */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #9fb3c8;
+  font-size: 13px;
+}
+
+.live {
+  background: #0f3d36;
+  color: #53f3b3;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>📱 Mags's Phone</h2>
+  <p class="subtitle">
+    Live status of my phone including battery, volume, and iOS version.
+  </p>
+
+  <div class="device">
+
+    <div class="phone">
+      <div class="battery-big" id="bigBattery">76%</div>
+      <small>iPhone 16</small>
+    </div>
+
+    <div class="info">
+      <div class="row">
+        <span>iPhone 16</span>
+        <span class="badge">iOS 26.4</span>
+      </div>
+
+      <div class="progress-block">
+        <label>Battery <span id="batteryText">76%</span></label>
+        <div class="progress">
+          <div class="bar" id="batteryBar"></div>
+        </div>
+      </div>
+
+      <div class="progress-block">
+        <label>Volume <span id="volumeText">33%</span></label>
+        <div class="progress">
+          <div class="bar" id="volumeBar"></div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span id="updated">Updated: --</span>
+        <span class="live">● Live</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function updateUI(battery, volume) {
+  document.getElementById("batteryBar").style.width = battery + "%";
+  document.getElementById("volumeBar").style.width = volume + "%";
+
+  document.getElementById("batteryText").textContent = battery + "%";
+  document.getElementById("volumeText").textContent = volume + "%";
+  document.getElementById("bigBattery").textContent = battery + "%";
+
+  const now = new Date().toLocaleTimeString();
+  document.getElementById("updated").textContent = "Updated: " + now;
+}
+
+// Simulated live updates every 3 seconds
+setInterval(() => {
+  const battery = Math.floor(Math.random() * 100);
+  const volume = Math.floor(Math.random() * 100);
+  updateUI(battery, volume);
+}, 3000);
+
+// Initial load
+updateUI(76, 33);
+</script>
+
+</body>
+</html>
